@@ -1,24 +1,25 @@
-import { getRepository } from 'typeorm';
 import path from 'path';
 import fs from 'fs';
 
 import uploadConfig from '@config/upload';
 
 import AppError from '@shared/errors/AppError';
+import IUsersRepository from '../repositories/IUsersRepository';
 
 import User from '../infra/typeorm/entities/User';
 
-interface Request {
+interface IRequest {
     user_id: string;
     avatarFilename: string;
 }
 
 class UpdateUserAvatarService {
-    public async execute({ user_id, avatarFilename }: Request): Promise<User> {
-        const userRepository = getRepository(User);
+    // eslint-disable-next-line prettier/prettier
+    constructor(private usersRepository: IUsersRepository) { }
 
+    public async execute({ user_id, avatarFilename }: IRequest): Promise<User> {
         // verifica se o usuário está autenticado
-        const user = await userRepository.findOne(user_id);
+        const user = await this.usersRepository.findById(user_id);
 
         if (!user) {
             throw new AppError(
@@ -49,7 +50,7 @@ class UpdateUserAvatarService {
         user.avatar = avatarFilename;
 
         // save serve tanto para criar quanto atualizar
-        await userRepository.save(user);
+        await this.usersRepository.save(user);
 
         return user;
     }
