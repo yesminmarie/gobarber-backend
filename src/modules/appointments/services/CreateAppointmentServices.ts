@@ -1,4 +1,5 @@
 import { startOfHour } from 'date-fns';
+import { injectable, inject } from 'tsyringe';
 
 import AppError from '@shared/errors/AppError';
 
@@ -9,8 +10,15 @@ interface IRequest {
     provider_id: string;
     date: Date;
 }
+
+// @injectable() indica que a classe vai receber injeção de dependências
+@injectable()
 class CreateAppointmentService {
-    constructor(private appointmentsRepository: IAppointmentsRepository) { }
+    constructor(
+        // injeta o repositório
+        @inject('AppointmentsRepository')
+        private appointmentsRepository: IAppointmentsRepository,
+    ) { }
 
     public async execute({
         date,

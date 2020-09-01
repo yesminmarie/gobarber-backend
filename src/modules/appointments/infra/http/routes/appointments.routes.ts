@@ -5,7 +5,8 @@ import { Router } from 'express';
 // isEqual verifica se duas datas são iguais
 import { parseISO } from 'date-fns';
 
-import AppointmentsRepository from '@modules/appointments/infra/typeorm/repositories/AppointmentsRepository';
+import { container } from 'tsyringe';
+
 import CreateAppointmentService from '@modules/appointments/services/CreateAppointmentServices';
 
 import ensureAuthenticated from '@modules/users/infra/http/middlewares/ensureAuthenticated';
@@ -30,11 +31,7 @@ appointmentsRouter.post('/', async (request, response) => {
     // apenas transforma uma string em objeto Date (não é regra de negócio)
     const parsedDate = parseISO(date);
 
-    const appointmentsRepository = new AppointmentsRepository();
-    // toda vez que for utilizar o service, passar appointmentsRepository como parâmetro
-    const createAppointment = new CreateAppointmentService(
-        appointmentsRepository,
-    );
+    const createAppointment = container.resolve(CreateAppointmentService);
 
     const appointment = await createAppointment.execute({
         date: parsedDate,
