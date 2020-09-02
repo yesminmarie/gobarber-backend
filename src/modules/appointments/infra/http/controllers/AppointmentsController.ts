@@ -6,7 +6,7 @@ import { parseISO } from 'date-fns';
 
 import { container } from 'tsyringe';
 
-import CreateAppointmentService from '@modules/appointments/services/CreateAppointmentServices';
+import CreateAppointmentService from '@modules/appointments/services/CreateAppointmentService';
 
 export default class AppointmentController {
     public async create(
