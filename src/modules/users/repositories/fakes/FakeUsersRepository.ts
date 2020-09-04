@@ -5,7 +5,7 @@ import ICreateUserDTO from '@modules/users/dtos/ICreateUserDTO';
 
 import User from '../../infra/typeorm/entities/User'; // importa o modelo de User
 
-class UsersRepository implements IUsersRespository {
+class FakeUsersRepository implements IUsersRespository {
     private users: User[] = [];
 
     public async findById(id: string): Promise<User | undefined> {
@@ -30,7 +30,9 @@ class UsersRepository implements IUsersRespository {
     }
 
     public async save(user: User): Promise<User> {
-        const findIndex = this.users.findIndex(findUser => findUser.id === user.id);
+        const findIndex = this.users.findIndex(
+            findUser => findUser.id === user.id,
+        );
 
         this.users[findIndex] = user;
 
@@ -38,4 +40,4 @@ class UsersRepository implements IUsersRespository {
     }
 }
 
-export default UsersRepository;
+export default FakeUsersRepository;
