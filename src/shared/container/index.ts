@@ -9,8 +9,8 @@ import AppointmentsRepository from '@modules/appointments/infra/typeorm/reposito
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import UsersRepository from '@modules/users/infra/typeorm/repositories/UsersRepository';
 
-// import IUserTokensRepository from '@modules/users/repositories/IUserTokensRepository';
-// import UserTokensRepository from '@modules/users/infra/typeorm/repositories/UsersRepository';
+import IUserTokensRepository from '@modules/users/repositories/IUserTokensRepository';
+import UserTokensRepository from '@modules/users/infra/typeorm/repositories/UserTokensRepository';
 
 // registerSingleton recebe como primeiro parâmetro um id que pode ser o mesmo nome do repositório
 // segundo parâmetro é o que ele retorna (AppointmentsRepository)
@@ -24,4 +24,9 @@ container.registerSingleton<IAppointmentsRepository>(
 container.registerSingleton<IUsersRepository>(
     'UsersRepository',
     UsersRepository,
+);
+
+container.registerSingleton<IUserTokensRepository>(
+    'UserTokensRepository',
+    UserTokensRepository,
 );
