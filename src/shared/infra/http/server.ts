@@ -18,7 +18,7 @@ app.use(express.json());
 // toda rota que começa com o prefixo 'files'
 // o que vem depois dela será servido de forma estática (nome do arquivo)
 // serve uma pasta de forma estática
-app.use('/files', express.static(uploadConfig.directory));
+app.use('/files', express.static(uploadConfig.uploadsFolder));
 app.use(routes);
 
 // _ (underline) diz para o eslint que essa variável não será utilizada (seria o next)

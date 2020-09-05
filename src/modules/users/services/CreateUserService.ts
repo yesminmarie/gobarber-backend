@@ -20,7 +20,7 @@ class CreateUserService {
 
         @inject('HashProvider')
         private hashProvider: IHashProvider,
-    ) { }
+    ) {}
 
     public async execute({ name, email, password }: IRequest): Promise<User> {
         // verifica se o email é duplicado
