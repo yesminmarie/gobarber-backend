@@ -23,7 +23,7 @@ class UpdateUserAvatarService {
 
         @inject('StorageProvider')
         private storageProvider: IStorageProvider,
-    ) { }
+    ) {}
 
     public async execute({ user_id, avatarFilename }: IRequest): Promise<User> {
         // verifica se o usuário está autenticado
