@@ -1,5 +1,5 @@
 import { injectable, inject } from 'tsyringe';
-import { getHours } from 'date-fns';
+import { getHours, isAfter } from 'date-fns';
 
 import IAppointmentsRepository from '../repositories/IAppointmentsRepository';
 
@@ -44,14 +44,21 @@ class ListProviderDayAvailabilityService {
             (_, index) => index + hourStart,
         );
 
+        const currentDate = new Date(Date.now());
+
         // procura se existe agendamentos no horário informado
         const availability = eachHourArray.map(hour => {
             const hasAppointmentInHour = appointments.find(
                 appointment => getHours(appointment.date) === hour,
             );
+
+            const compareDate = new Date(year, month - 1, day, hour);
+
             return {
                 hour,
-                available: !hasAppointmentInHour, // se exisir um agendamento available será false, senão será true
+                // se não exisir um agendamento, e a data e horário for depois da data atual, available será true, senão será false
+                available:
+                    !hasAppointmentInHour && isAfter(compareDate, currentDate),
             };
         });
 
