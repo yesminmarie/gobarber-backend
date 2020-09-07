@@ -3,6 +3,7 @@ import { getRepository, Repository, Raw } from 'typeorm';
 import IAppointmentsRespository from '@modules/appointments/repositories/IAppointmentsRepository';
 import ICreateAppointmentDTO from '@modules/appointments/dtos/ICreateAppointmentDTO';
 import IFindAllInMonthFromProviderDTO from '@modules/appointments/dtos/IFindAllInMonthFromProviderDTO';
+import IFindAllInDayFromProviderDTO from '@modules/appointments/dtos/IFindAllInDayFromProviderDTO';
 
 import Appointment from '../entities/Appointment'; // importa o modelo de Appointment
 
@@ -44,6 +45,32 @@ class AppointmentsRepository implements IAppointmentsRespository {
                 date: Raw(
                     dateFieldName =>
                         `to_char(${dateFieldName}, 'MM-YYYY') = '${parsedMonth}-${year}'`,
+                ),
+            },
+        });
+        return appointments;
+    }
+
+    public async findAllInDayFromProvider({
+        provider_id,
+        day,
+        month,
+        year,
+    }: IFindAllInDayFromProviderDTO): Promise<Appointment[]> {
+        // padStart(2, '0') insere um '0' à esquerda se o número não possuir dois dígitos, ficando, por exemplo 01
+        const parsedDay = String(day).padStart(2, '0');
+        const parsedMonth = String(month).padStart(2, '0');
+
+        const appointments = await this.ormRepository.find({
+            where: {
+                provider_id,
+                // banco Postgres possui a função 'to_char' que pode converter data em texto
+                // o 'Raw' do typeorm escreve uma condição no formato raw, ou seja, um texto diretamente passado para o Postgres,
+                // não vai ser interpretado pelo Typeorm, como se fosse uma query sql
+                // o Typeorm muda os nomes dos campos, colocando prefixos para eles, então a função recebida em Raw pega esse nome gerado "dateFieldName"
+                date: Raw(
+                    dateFieldName =>
+                        `to_char(${dateFieldName}, 'DD-MM-YYYY') = '${parsedDay}-${parsedMonth}-${year}'`,
                 ),
             },
         });
