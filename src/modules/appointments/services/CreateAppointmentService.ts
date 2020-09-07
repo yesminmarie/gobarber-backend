@@ -18,7 +18,7 @@ class CreateAppointmentService {
         // injeta o repositório
         @inject('AppointmentsRepository')
         private appointmentsRepository: IAppointmentsRepository,
-    ) { }
+    ) {}
 
     public async execute({
         date,

@@ -1,11 +1,12 @@
-import { getRepository, Repository } from 'typeorm';
+import { getRepository, Repository, Not } from 'typeorm';
 
-import IUsersRespository from '@modules/users/repositories/IUsersRepository';
+import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import ICreateUserDTO from '@modules/users/dtos/ICreateUserDTO';
+import IFindAllProvidersDTO from '@modules/users/dtos/IFindAllProvidersDTO';
 
 import User from '../entities/User'; // importa o modelo de User
 
-class UsersRepository implements IUsersRespository {
+class UsersRepository implements IUsersRepository {
     // a variável ormRepository é um repositorio do TypeORM da entidade de User
     private ormRepository: Repository<User>;
 
@@ -26,6 +27,26 @@ class UsersRepository implements IUsersRespository {
         });
 
         return user;
+    }
+
+    public async findAllProviders({
+        except_user_id,
+    }: IFindAllProvidersDTO): Promise<User[]> {
+        let users: User[];
+
+        if (except_user_id) {
+            // se existir except_user_id, lista todos os usuários menos o que possui except_user_id
+            users = await this.ormRepository.find({
+                where: {
+                    id: Not(except_user_id),
+                },
+            });
+        } else {
+            // se não exisitir except_user_id, lista todos os usuários
+            users = await this.ormRepository.find();
+        }
+
+        return users;
     }
 
     public async create(userData: ICreateUserDTO): Promise<User> {
