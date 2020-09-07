@@ -26,6 +26,13 @@ class Appointment {
     @JoinColumn({ name: 'provider_id' }) // coluna que vai identificar qual é o usuário prestador do serviço
     provider: User; // propriedade. Instância da classe User
 
+    @Column()
+    user_id: string;
+
+    @ManyToOne(() => User)
+    @JoinColumn({ name: 'user_id' })
+    user: User;
+
     @Column('timestamp with time zone')
     date: Date;
 
