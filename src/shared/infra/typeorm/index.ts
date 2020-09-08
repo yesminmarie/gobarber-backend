@@ -1,4 +1,4 @@
-import { createConnection } from 'typeorm';
+import { createConnections } from 'typeorm';
 
 // vai procurar em toda a pasta do projeto um arquivo chamado ormconfig.json
 // se ele encontrar, automaticamente ele já vai ler os dados desse arquivo
@@ -10,4 +10,4 @@ import { createConnection } from 'typeorm';
 // porque a cli do typeorm não vai ler as credenciais
 // de acesso ao banco de dentro do arquivo database.ts, mas ela lê por padrão,
 // de dentro do ormconfig.json
-createConnection();
+createConnections();
