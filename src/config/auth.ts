@@ -1,6 +1,8 @@
+import { preProcessFile } from 'typescript';
+
 export default {
     jwt: {
-        secret: 'cf719eacd2a4000638db371ac96da1fc',
+        secret: process.env.APP_SECRET,
         expiresIn: '1d',
     },
 };
