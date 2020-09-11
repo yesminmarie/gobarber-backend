@@ -18,13 +18,10 @@ export default class AppointmentController {
         // date -> data e horário
         const { provider_id, date } = request.body;
 
-        // apenas transforma uma string em objeto Date (não é regra de negócio)
-        const parsedDate = parseISO(date);
-
         const createAppointment = container.resolve(CreateAppointmentService);
 
         const appointment = await createAppointment.execute({
-            date: parsedDate,
+            date,
             provider_id,
             user_id,
         });
