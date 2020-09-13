@@ -57,6 +57,7 @@ class CreateAppointmentService {
         // chama o método findByDate de AppointmentsRepository para procurar se existe um agendamento na mesma data
         const findAppointmentInSameDate = await this.appointmentsRepository.findByDate(
             appointmentDate,
+            provider_id,
         );
 
         // se encontrar um appointment na mesma data retorna uma mensagem de erro
