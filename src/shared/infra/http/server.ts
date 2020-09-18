@@ -16,13 +16,13 @@ import '@shared/container'; // importa o container de injeção de dependências
 
 const app = express();
 
-app.use(rateLimiter);
 app.use(cors());
 app.use(express.json());
 // toda rota que começa com o prefixo 'files'
 // o que vem depois dela será servido de forma estática (nome do arquivo)
 // serve uma pasta de forma estática
 app.use('/files', express.static(uploadConfig.uploadsFolder));
+app.use(rateLimiter); // colocar após a rota de requisição de imagens (linha acima), para que o limite de requisições não seja aplicado a ela
 app.use(routes);
 
 app.use(errors());
