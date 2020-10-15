@@ -1,6 +1,6 @@
 <h1 align="center">:rocket: GoBarber-Backend :rocket:</h1>
 
-<p align="center">This project was developed in the GoStack Bootcamp from Rocketseat. It is the backend of a application for barbershops named GoBarber. The frontend can be accessed <a href="https://github.com/yesminmarie/gobarber-web">here</a> and the mobile version <a href="https://github.com/yesminmarie/gobarber-mobile">here</a>.</p>
+<p align="center">This project was developed in GoStack Bootcamp from Rocketseat. It is the backend of a application for barbershops named GoBarber. The frontend can be accessed <a href="https://github.com/yesminmarie/gobarber-web">here</a> and the mobile version <a href="https://github.com/yesminmarie/gobarber-mobile">here</a>.</p>
 
 <p align="center">
  <a href="#objective">Objective</a> •
@@ -22,8 +22,8 @@
 - [Tsyringe](https://github.com/microsoft/tsyringe/ "Tsyringe")
 - [Jest](https://jestjs.io/ "Jest")
 - [Celebrate](https://www.npmjs.com/package/celebrate "Celebrate")
-- [Ethereal](https://ethereal.email/ "Ethereal") (For sending email in a development environment)
-- [Amazon Simple Email Service](https://aws.amazon.com/pt/ses/) (For sending email in a production environment)
+- [Ethereal](https://ethereal.email/ "Ethereal") (For sending email in development environment)
+- [Amazon Simple Email Service](https://aws.amazon.com/pt/ses/) (For sending email in production environment)
 - [Postgres](https://www.postgresql.org/)
 - [MongoDB](https://www.mongodb.com/)
 - [Redis](https://redis.io/)
