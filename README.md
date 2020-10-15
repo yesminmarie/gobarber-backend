@@ -13,7 +13,7 @@
 
 <h1 id="technologies">:rocket: Technologies</h1>
 
-<p>It was used these technologies in this challenge.</p>
+<p>It was used these technologies in this project.</p>
 
 - [Node.js](https://nodejs.org/en/ "Node.js")
 - [Typescript](https://www.typescriptlang.org/ "Typescript")
